@@ -1,0 +1,46 @@
+version: "3.9"
+services:
+  prebid-server:
+    image: prebid-server
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - GOOS=linux
+        - GOARCH=arm64
+        - CGO_ENABLED=1
+        - CC=gcc
+    env_file:
+      - ./.env.default
+      - ./.env
+    ports:
+      - 18001:18001
+      - 18002:18002
+    depends_on:
+      prebid-cache:
+        condition: service_healthy
+
+  prebid-cache:
+    platform: linux/x86_64
+    image: prebid/prebid-cache:v0.30.0
+    ports:
+      - 19001:19001
+      - 19002:19002
+    environment:
+      PBC_PORT: 19001
+      PBC_ADMIN_PORT: 19002
+      PBC_BACKEND_TYPE: redis
+      PBC_BACKEND_REDIS_HOST: redis
+      PBC_BACKEND_REDIS_PORT: 6379
+    healthcheck:
+      test:  timeout 10s bash -c ':> /dev/tcp/127.0.0.1/19001' || exit 1
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  redis:
+    image: redis:8.2.0-alpine3.22
+    ports:
+      - 6379:6379
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]

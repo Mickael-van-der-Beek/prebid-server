@@ -1,4 +1,14 @@
 FROM ubuntu:22.04 AS build
+
+ARG GOOS
+ARG GOARCH
+ARG CGO_ENABLED
+ARG CC
+ENV GOOS $GOOS
+ENV GOARCH $GOARCH
+ENV CGO_ENABLED $CGO_ENABLED
+ENV CC $CC
+
 RUN apt-get update && \
     apt-get -y upgrade && \
     apt-get install -y --no-install-recommends wget ca-certificates

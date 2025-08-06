@@ -54,3 +54,6 @@ prebid-server.iml
 *~
 *.swp
 *.swo
+
+# Environment variables files
+.env
