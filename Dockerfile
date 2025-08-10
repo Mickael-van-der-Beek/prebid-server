@@ -30,6 +30,7 @@ RUN apt-get update && \
 # CGO must be enabled because some modules depend on native C code
 ENV CGO_ENABLED 1
 COPY ./ ./
+RUN go generate modules/modules.go
 RUN go mod tidy
 RUN go mod vendor
 ARG TEST="true"
@@ -41,6 +42,7 @@ LABEL maintainer="hans.hjort@xandr.com"
 WORKDIR /usr/local/bin/
 COPY --from=build /app/prebid-server .
 RUN chmod a+xr prebid-server
+COPY pbs.yaml /etc/config/pbs.yaml
 COPY static static/
 COPY stored_requests/data stored_requests/data
 RUN chmod -R a+r static/ stored_requests/data

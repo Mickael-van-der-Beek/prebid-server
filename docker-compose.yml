@@ -10,15 +10,18 @@ services:
         - GOARCH=arm64
         - CGO_ENABLED=1
         - CC=gcc
-    env_file:
-      - ./.env.default
-      - ./.env
+    command: -v=0 -stderrthreshold=0
+    # env_file:
+    #   - ./.env.default
+    #   - ./.env
     ports:
       - 18001:18001
       - 18002:18002
-    depends_on:
-      prebid-cache:
-        condition: service_healthy
+    # depends_on:
+    #   postgresql:
+    #     condition: service_healthy
+    #   prebid-cache:
+    #     condition: service_healthy
 
   prebid-cache:
     platform: linux/x86_64
@@ -44,3 +47,14 @@ services:
       - 6379:6379
     healthcheck:
       test: [ "CMD", "redis-cli", "ping" ]
+
+  postgresql:
+    image: postgres:17.5-alpine
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=toor
+      - POSTGRES_DB=pbs_test
+    ports:
+      - 5432:5432
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-d", "pbs_test" ]
