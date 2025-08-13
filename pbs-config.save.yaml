@@ -1,0 +1,712 @@
+external_url: https://durbuy.ngrok.io
+admin_port: 18002
+port: 18001
+
+gdpr:
+  enabled: false
+  default_value: false
+  host_vendor_id: 501
+  usersync_ifambiguous: false
+  tcf2:
+    enabled: false
+    purpose1:
+      enforce_vendors: false
+    purpose2:
+      enforce_vendors: false
+    purpose3:
+      enforce_vendors: false
+    purpose4:
+      enforce_vendors: false
+    purpose5:
+      enforce_vendors: false
+    purpose6:
+      enforce_vendors: false
+    purpose7:
+      enforce_vendors: false
+    purpose8:
+      enforce_vendors: false
+    purpose9:
+      enforce_vendors: false
+    purpose10:
+      enforce_vendors: false
+
+ccpa:
+  enforce: false
+
+# datacenter:
+#   region: eu-test
+#   name: primary
+
+account:
+  defaults:
+    debug_allow: false
+
+adapters:
+  appnexus:
+    disabled: false
+    debug:
+      allow: true
+    # endpoint: http://ib.adnxs.com/ut/v3/prebid
+    endpoint: http://ib.adnxs.com/openrtb2/prebid
+    endpoint_compression: false
+    platform_id: 9124
+    usersync:
+      default: true
+      key: adnxs
+      support_cors: true
+      supports:
+        - iframe
+      iframe:
+        url: https://ib.adnxs.com/getuid?{{.RedirectURL}}&consent=1
+        # redirect_url: https://durbuy.ngrok.io/cookie_sync?bidder=appnexus&uid=$UID
+        redirect_url: https://durbuy.ngrok.io/setuid?bidder=appnexus&gdpr=0&gdpr_consent=&gpp=&gpp_sid=&f=b&uid=$UID&consent=1
+      # url: http://ib.adnxs.com/getuid?{{.GDPR}}
+      # redirect:
+      #   url: https://ib.adnxs.com/getuid?{{.RedirectURL}}
+      #   redirect_url: https://durbuy.ngrok.io/cookie_sync?bidder=appnexus&uid=$UID
+      #   user_macro: $UID
+      # support_cookies: true
+  feedad:
+    disabled: true
+  huaweiads:
+    disabled: true
+  adrino:
+    disabled: true
+  freewheelssp:
+    disabled: true
+  iionads:
+    disabled: true
+  bidmatic:
+    disabled: true
+  fwssp:
+    disabled: true
+  advangelists:
+    disabled: true
+  adagio:
+    disabled: true
+  minutemedia:
+    disabled: true
+  madsense:
+    disabled: true
+  criteo:
+    disabled: true
+  aja:
+    disabled: true
+  rediads:
+    disabled: true
+  madvertise:
+    disabled: true
+  acuityads:
+    disabled: true
+  indicue:
+    disabled: true
+  adverxo:
+    disabled: true
+  adtelligent:
+    disabled: true
+  trustx:
+    disabled: true
+  emx_digital:
+    disabled: true
+  admaticde:
+    disabled: true
+  streamvision:
+    disabled: true
+  bematterfull:
+    disabled: true
+  yeahmobi:
+    disabled: true
+  sa_lunamedia:
+    disabled: true
+  tredio:
+    disabled: true
+  tradplus:
+    disabled: true
+  coinzilla:
+    disabled: true
+  exco:
+    disabled: true
+  inmobi:
+    disabled: true
+  adt:
+    disabled: true
+  adquery:
+    disabled: true
+  connektai:
+    disabled: true
+  sparteo:
+    disabled: true
+  ogury:
+    disabled: true
+  jdpmedia:
+    disabled: true
+  globalsun:
+    disabled: true
+  bluesea:
+    disabled: true
+  aceex:
+    disabled: true
+  videobyte:
+    disabled: true
+  adot:
+    disabled: true
+  relevantdigital:
+    disabled: true
+  adxcg:
+    disabled: true
+  optidigital:
+    disabled: true
+  aax:
+    disabled: true
+  pgam:
+    disabled: true
+  greedygame:
+    disabled: true
+  connatix:
+    disabled: true
+  gumgum:
+    disabled: true
+  beachfront:
+    disabled: true
+  adtarget:
+    disabled: true
+  infytv:
+    disabled: true
+  vungle:
+    disabled: true
+  revcontent:
+    disabled: true
+  adkernelAdn:
+    disabled: true
+  kidoz:
+    disabled: true
+  smartyads:
+    disabled: true
+  aduptech:
+    disabled: true
+  vidoomy:
+    disabled: true
+  loopme:
+    disabled: true
+  theadx:
+    disabled: true
+  pwbid:
+    disabled: true
+  definemedia:
+    disabled: true
+  152media:
+    disabled: true
+  pubrise:
+    disabled: true
+  pubmatic:
+    disabled: true
+  sspBC:
+    disabled: true
+  adport:
+    disabled: true
+  e_volution:
+    disabled: true
+  mediasquare:
+    disabled: true
+  gothamads:
+    disabled: true
+  blis:
+    disabled: true
+  audienceNetwork:
+    disabled: true
+  trafficgate:
+    disabled: true
+  adview:
+    disabled: true
+  resetdigital:
+    disabled: true
+  invibes:
+    disabled: true
+  outbrain:
+    disabled: true
+  bcmint:
+    disabled: true
+  gamoshi:
+    disabled: true
+  viewdeos:
+    disabled: true
+  nativo:
+    disabled: true
+  telaria:
+    disabled: true
+  apacdex:
+    disabled: true
+  impactify:
+    disabled: true
+  datablocks:
+    disabled: true
+  taboola:
+    disabled: true
+  richaudience:
+    disabled: true
+  between:
+    disabled: true
+  gamma:
+    disabled: true
+  rtbhouse:
+    disabled: true
+  mobilefuse:
+    disabled: true
+  avocet:
+    disabled: true
+  easybid:
+    disabled: true
+  metax:
+    disabled: true
+  sovrn:
+    disabled: true
+  mobkoi:
+    disabled: true
+  pgamssp:
+    disabled: true
+  adnuntius:
+    disabled: true
+  adf:
+    disabled: true
+  brave:
+    disabled: true
+  triplelift_native:
+    disabled: true
+  intenze:
+    disabled: true
+  visiblemeasures:
+    disabled: true
+  ix:
+    disabled: true
+  unruly:
+    disabled: true
+  grid:
+    disabled: true
+  magnite:
+    disabled: true
+  seedtag:
+    disabled: true
+  silverpush:
+    disabled: true
+  limelightDigital:
+    disabled: true
+  sovrnXsp:
+    disabled: true
+  zeta_global_ssp:
+    disabled: true
+  embimedia:
+    disabled: true
+  adkernel:
+    disabled: true
+  valueimpression:
+    disabled: true
+  playdigo:
+    disabled: true
+  edge226:
+    disabled: true
+  adtonos:
+    disabled: true
+  addigi:
+    disabled: true
+  lemmadigital:
+    disabled: true
+  streamkey:
+    disabled: true
+  nobid:
+    disabled: true
+  kayzen:
+    disabled: true
+  vox:
+    disabled: true
+  prismassp:
+    disabled: true
+  colossus:
+    disabled: true
+  admatic:
+    disabled: true
+  adform:
+    disabled: true
+  amx:
+    disabled: true
+  compass:
+    disabled: true
+  yobee:
+    disabled: true
+  silvermob:
+    disabled: true
+  flatads:
+    disabled: true
+  sonobi:
+    disabled: true
+  automatad:
+    disabled: true
+  adoppler:
+    disabled: true
+  streamlyn:
+    disabled: true
+  insticator:
+    disabled: true
+  netaddiction:
+    disabled: true
+  teads:
+    disabled: true
+  nextmillennium:
+    disabled: true
+  blasto:
+    disabled: true
+  smartadserver:
+    disabled: true
+  copper6ssp:
+    disabled: true
+  mobfoxpb:
+    disabled: true
+  finative:
+    disabled: true
+  yahooAdvertising:
+    disabled: true
+  adtrgtme:
+    disabled: true
+  cointraffic:
+    disabled: true
+  screencore:
+    disabled: true
+  smartrtb:
+    disabled: true
+  epsilon:
+    disabled: true
+  tappx:
+    disabled: true
+  mediafuse:
+    disabled: true
+  consumable:
+    disabled: true
+  kuantyx:
+    disabled: true
+  logan:
+    disabled: true
+  markapp:
+    disabled: true
+  blue:
+    disabled: true
+  xtrmqb:
+    disabled: true
+  kargo:
+    disabled: true
+  aidem:
+    disabled: true
+  smartx:
+    disabled: true
+  conversant:
+    disabled: true
+  bidmyadz:
+    disabled: true
+  kobler:
+    disabled: true
+  intertech:
+    disabled: true
+  algorix:
+    disabled: true
+  adgeneration:
+    disabled: true
+  boldwin:
+    disabled: true
+  jixie:
+    disabled: true
+  beintoo:
+    disabled: true
+  freewheel-ssp:
+    disabled: false
+  rxnetwork:
+    disabled: true
+  1accord:
+    disabled: true
+  mgid:
+    disabled: true
+  kiviads:
+    disabled: true
+  readpeak:
+    disabled: true
+  startio:
+    disabled: true
+  decenterads:
+    disabled: true
+  adsinteractive:
+    disabled: true
+  yieldmo:
+    disabled: true
+  evtech:
+    disabled: true
+  frvradn:
+    disabled: true
+  adhese:
+    disabled: true
+  zmaticoo:
+    disabled: true
+  nexx360:
+    disabled: true
+  mediago:
+    disabled: true
+  bidscube:
+    disabled: true
+  escalax:
+    disabled: true
+  trustedstack:
+    disabled: true
+  dmx:
+    disabled: true
+  adelement:
+    disabled: true
+  rubicon:
+    disabled: true
+  yahoossp:
+    disabled: true
+  iqzone:
+    disabled: true
+  smoot:
+    disabled: true
+  bigoad:
+    disabled: true
+  cpmstar:
+    disabled: true
+  videoheroes:
+    disabled: true
+  smaato:
+    disabled: true
+  bidtheatre:
+    disabled: true
+  roulax:
+    disabled: true
+  marsmedia:
+    disabled: true
+  oraki:
+    disabled: true
+  axonix:
+    disabled: true
+  monetixads:
+    disabled: true
+  ads_interactive:
+    disabled: true
+  interactiveoffers:
+    disabled: true
+  driftpixel:
+    disabled: true
+  thetradedesk:
+    disabled: true
+  triplelift:
+    disabled: true
+  tpmn:
+    disabled: true
+  ucfunnel:
+    disabled: true
+  ccx:
+    disabled: true
+  motorik:
+    disabled: true
+  beyondmedia:
+    disabled: true
+  akcelo:
+    disabled: true
+  adpone:
+    disabled: true
+  logicad:
+    disabled: true
+  loyal:
+    disabled: true
+  appush:
+    disabled: true
+  yandex:
+    disabled: true
+  ttd:
+    disabled: true
+  missena:
+    disabled: true
+  artechnology:
+    disabled: true
+  bliink:
+    disabled: true
+  ownadx:
+    disabled: true
+  deepintent:
+    disabled: true
+  kueezrtb:
+    disabled: true
+  filmzie:
+    disabled: true
+  cwire:
+    disabled: true
+  pangle:
+    disabled: true
+  yieldlab:
+    disabled: true
+  mobupps:
+    disabled: true
+  dianomi:
+    disabled: true
+  openweb:
+    disabled: true
+  openx:
+    disabled: true
+  lm_kiviads:
+    disabled: true
+  medianet:
+    disabled: true
+  displayio:
+    disabled: true
+  axis:
+    disabled: true
+  orbidder:
+    disabled: true
+  operaads:
+    disabled: true
+  xeworks:
+    disabled: true
+  bwx:
+    disabled: true
+  equativ:
+    disabled: true
+  alkimi:
+    disabled: true
+  adprime:
+    disabled: true
+  connectad:
+    disabled: true
+  improvedigital:
+    disabled: true
+  orangeclickmedia:
+    disabled: true
+  stroeerCore:
+    disabled: true
+  yieldone:
+    disabled: true
+  zeroclickfraud:
+    disabled: true
+  concert:
+    disabled: true
+  oms:
+    disabled: true
+  imds:
+    disabled: true
+  iqx:
+    disabled: true
+  pubnative:
+    disabled: true
+  flipp:
+    disabled: true
+  lunamedia:
+    disabled: true
+  vidazoo:
+    disabled: true
+  janet:
+    disabled: true
+  cadent_aperture_mx:
+    disabled: true
+  zentotem:
+    disabled: true
+  bidgency:
+    disabled: true
+  mabidder:
+    disabled: true
+  admixer:
+    disabled: true
+  suntContent:
+    disabled: true
+  adtg_org:
+    disabled: true
+  adman:
+    disabled: true
+  melozen:
+    disabled: true
+  unicorn:
+    disabled: true
+  bidsmind:
+    disabled: true
+  progx:
+    disabled: true
+  emtv:
+    disabled: true
+  quantumdex:
+    disabled: true
+  smrtconnect:
+    disabled: true
+  vimayx:
+    disabled: true
+  appstock:
+    disabled: true
+  lockerdome:
+    disabled: true
+  adyoulike:
+    disabled: true
+  vrtcal:
+    disabled: true
+  tgm:
+    disabled: true
+  velonium:
+    disabled: true
+  33across:
+    disabled: true
+  copper6:
+    disabled: true
+  epom:
+    disabled: true
+  rise:
+    disabled: true
+  bidmachine:
+    disabled: true
+  qt:
+    disabled: true
+  pixad:
+    disabled: true
+  pulsepoint:
+    disabled: true
+  krushmedia:
+    disabled: true
+  dxkulture:
+    disabled: true
+  smarthub:
+    disabled: true
+  yahooAds:
+    disabled: true
+  seedingAlliance:
+    disabled: true
+  adinify:
+    disabled: true
+  eplanning:
+    disabled: true
+  aso:
+    disabled: true
+  adsyield:
+    disabled: true
+  mgidX:
+    disabled: true
+  visx:
+    disabled: true
+  synacormedia:
+    disabled: true
+  smilewanted:
+    disabled: true
+  bmtm:
+    disabled: true
+  bidstack:
+    disabled: true
+  sharethrough:
+    disabled: true
+  undertone:
+    disabled: true
+  jambojar:
+    disabled: true
+  adocean:
+    disabled: true
+  onetag:
+    disabled: true
+  felixads:
+    disabled: true
+
+hooks:
+  enabled: true
+  modules:
+    alliancegravity:
+      tamaris:
+        enabled: true
+
+log:
+  level: info

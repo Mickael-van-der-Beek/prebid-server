@@ -29,7 +29,56 @@ RUN apt-get update && \
 
 # CGO must be enabled because some modules depend on native C code
 ENV CGO_ENABLED 1
-COPY ./ ./
+COPY ./metrics ./metrics
+COPY ./exchange ./exchange
+COPY ./adservertargeting ./adservertargeting
+COPY ./endpoints ./endpoints
+COPY ./privacy ./privacy
+COPY ./util ./util
+COPY ./config ./config
+COPY ./bidadjustment ./bidadjustment
+COPY ./privacysandbox ./privacysandbox
+COPY ./dsa ./dsa
+COPY ./.semgrep ./.semgrep
+COPY ./server ./server
+COPY ./docs ./docs
+COPY ./.devcontainer ./.devcontainer
+COPY ./firstpartydata ./firstpartydata
+COPY ./openrtb_ext ./openrtb_ext
+COPY ./gdpr ./gdpr
+COPY ./adapters ./adapters
+COPY ./macros ./macros
+COPY ./prebid_cache_client ./prebid_cache_client
+COPY ./version ./version
+COPY ./amp ./amp
+COPY ./static ./static
+COPY ./hooks ./hooks
+COPY ./stored_responses ./stored_responses
+COPY ./scripts ./scripts
+COPY ./.github ./.github
+COPY ./sample ./sample
+COPY ./rules ./rules
+COPY ./experiment ./experiment
+COPY ./ortb ./ortb
+COPY ./floors ./floors
+COPY ./errortypes ./errortypes
+COPY ./account ./account
+COPY ./.git ./.git
+COPY ./modules ./modules
+COPY ./currency ./currency
+COPY ./stored_requests ./stored_requests
+COPY ./usersync ./usersync
+COPY ./schain ./schain
+COPY ./injector ./injector
+COPY ./analytics ./analytics
+COPY ./pbs ./pbs
+COPY ./router ./router
+COPY ./validate.sh ./validate.sh
+COPY ./go.mod ./go.mod
+COPY ./Makefile ./Makefile
+COPY ./go.sum ./go.sum
+COPY ./main.go ./main.go
+COPY ./main_test.go ./main_test.go
 RUN go generate modules/modules.go
 RUN go mod tidy
 RUN go mod vendor
