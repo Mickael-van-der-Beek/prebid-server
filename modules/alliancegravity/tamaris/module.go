@@ -14,18 +14,10 @@ func Builder(_ json.RawMessage, _ moduledeps.ModuleDeps) (interface{}, error) {
 
 type Module struct {}
 
-func (m Module) HandleBidderRequesthook(
+func (m Module) HandleBidderRequestHook(
 	_ context.Context,
 	_ hookstage.ModuleInvocationContext,
 	payload hookstage.BidderRequestPayload,
 ) (hookstage.HookResult[hookstage.BidderRequestPayload], error) {
 	return handleBidderRequestHook(payload)
-}
-
-func (m Module) HandleEntrypointHook(
-	_ context.Context,
-	_ hookstage.ModuleInvocationContext,
-	payload hookstage.EntrypointPayload,
-) (hookstage.HookResult[hookstage.EntrypointPayload], error) {
-	return handleAuctionEntryPointRequestHook(payload)
 }
