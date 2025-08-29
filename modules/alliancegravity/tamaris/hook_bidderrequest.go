@@ -56,12 +56,21 @@ func handleBidderRequestHook(payload hookstage.BidderRequestPayload) (result hoo
 	glog.Warningf("RTDP_SEGMENTS")
 	glog.Warningf(segments)
 
+	glog.Warningf("__3")
+
 	if payloadRequestCopy.User == nil {
-		glog.Warningf("__3")
+		glog.Warningf("__4")
 		payloadRequestCopy.User = &openrtb2.User{}
 	}
+	glog.Warningf("__5")
 
 	payloadRequestCopy.User.Keywords = strings.Join([]string{ "tamaris=seg-123456" }, ",")
+
+	userJson2, _ := json.MarshalIndent(payloadRequestCopy, "", "  ")
+	glog.Warningf("USER_JSON_2")
+	glog.Warningf(string(userJson2))
+
+	payload.Request = &payloadRequestCopy
 
 	return hookstage.HookResult[hookstage.BidderRequestPayload]{
 		ModuleContext: moduleContext,

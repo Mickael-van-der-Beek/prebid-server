@@ -41,6 +41,26 @@ account:
   defaults:
     debug_allow: false
 
+hooks:
+  enabled: true
+  modules:
+    alliancegravity:
+      tamaris:
+        enabled: true
+  host_execution_plan:
+    endpoints:
+      /openrtb2/auction:
+        stages:
+          bidder_request:
+            groups:
+              - timeout: 10
+                hook_sequence:
+                  - module_code: alliancegravity.tamaris
+                    hook_impl_code: rtdp-hook
+
+log:
+  level: info
+
 adapters:
   appnexus:
     disabled: false
@@ -55,16 +75,6 @@ adapters:
       support_cors: true
       supports:
         - iframe
-      iframe:
-        url: https://ib.adnxs.com/getuid?{{.RedirectURL}}&consent=1
-        # redirect_url: https://durbuy.ngrok.io/cookie_sync?bidder=appnexus&uid=$UID
-        # redirect_url: https://durbuy.ngrok.io/setuid?bidder=appnexus&gdpr=0&gdpr_consent=&gpp=&gpp_sid=&f=b&uid=$UID&consent=1
-        redirect_url: "{{.ExternalURL}}/setuid?bidder={{.SyncerKey}}&gdpr={{.GDPR}}&gdpr_consent={{.GDPRConsent}}&gpp={{.GPP}}&gpp_sid={{.GPPSID}}&f={{.SyncType}}&uid={{.UserMacro}}"
-      # url: http://ib.adnxs.com/getuid?{{.GDPR}}
-      # redirect:
-      #   url: https://ib.adnxs.com/getuid?{{.RedirectURL}}
-      #   redirect_url: https://durbuy.ngrok.io/cookie_sync?bidder=appnexus&uid=$UID
-      #   user_macro: $UID
       # support_cookies: true
   feedad:
     disabled: true
@@ -415,7 +425,7 @@ adapters:
   beintoo:
     disabled: true
   freewheel-ssp:
-    disabled: false
+    disabled: true
   rxnetwork:
     disabled: true
   1accord:
@@ -700,23 +710,3 @@ adapters:
     disabled: true
   felixads:
     disabled: true
-
-hooks:
-  enabled: true
-  modules:
-    alliancegravity:
-      tamaris:
-        enabled: true
-  host_execution_plan:
-    endpoints:
-      /openrtb2/auction:
-        stages:
-          bidder_request:
-            groups:
-              - timeout: 10
-                hook_sequence:
-                  - module_code: alliancegravity.tamaris
-                    hook_impl_code: rtdp-hook
-
-log:
-  level: info
