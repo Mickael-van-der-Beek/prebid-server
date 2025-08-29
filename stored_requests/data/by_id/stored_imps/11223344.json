@@ -1,0 +1,15 @@
+{
+  "ext": {
+    "prebid": {
+      "bidder": {
+        "appnexus": {
+          "member": "9124",
+          "placement_id": 14698548
+        },
+        "adform": {
+          "mid": 987654321
+        }
+      }
+    }
+  }
+}

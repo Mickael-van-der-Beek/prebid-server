@@ -17,44 +17,75 @@ services:
     ports:
       - 18001:18001
       - 18002:18002
-    # depends_on:
+    depends_on:
+      rtdp:
+        condition: service_healthy
     #   postgresql:
     #     condition: service_healthy
     #   prebid-cache:
     #     condition: service_healthy
 
-  prebid-cache:
-    platform: linux/x86_64
-    image: prebid/prebid-cache:v0.30.0
-    ports:
-      - 19001:19001
-      - 19002:19002
-    environment:
-      PBC_PORT: 19001
-      PBC_ADMIN_PORT: 19002
-      PBC_BACKEND_TYPE: redis
-      PBC_BACKEND_REDIS_HOST: redis
-      PBC_BACKEND_REDIS_PORT: 6379
-    healthcheck:
-      test:  timeout 10s bash -c ':> /dev/tcp/127.0.0.1/19001' || exit 1
-    depends_on:
-      redis:
-        condition: service_healthy
+  # prebid-cache:
+  #   platform: linux/x86_64
+  #   image: prebid/prebid-cache:v0.30.0
+  #   ports:
+  #     - 19001:19001
+  #     - 19002:19002
+  #   environment:
+  #     PBC_PORT: 19001
+  #     PBC_ADMIN_PORT: 19002
+  #     PBC_BACKEND_TYPE: redis
+  #     PBC_BACKEND_REDIS_HOST: redis
+  #     PBC_BACKEND_REDIS_PORT: 6379
+  #   healthcheck:
+  #     test:  timeout 10s bash -c ':> /dev/tcp/127.0.0.1/19001' || exit 1
+  #   depends_on:
+  #     redis:
+  #       condition: service_healthy
 
-  redis:
-    image: redis:8.2.0-alpine3.22
+  # redis:
+  #   image: redis:8.2.0-alpine3.22
+  #   ports:
+  #     - 6379:6379
+  #   healthcheck:
+  #     test: [ "CMD", "redis-cli", "ping" ]
+
+  rtdp:
+    platform: linux/x86_64
+    image: 482633961092.dkr.ecr.eu-west-3.amazonaws.com/production-rtdp:38
     ports:
-      - 6379:6379
+      - 8080:8080
+    environment:
+      POSTGRESQL_CONNECTION_STRING: host=postgresql port=5432 dbname=rtdp_dev user=rtdp_development password=pdtr application_name=rtdp replication=database
+      INSTANCE: TEST1
+      FIXTURES_POSTGRESQL_CONNECTION_STRING: postgres://root:toor@postgresql:5432/rtdp_dev
+      AUTHORIZED_IPS: 0.0.0.0/0
+      POSTGRESQL_KEEPALIVE_INTERVAL: 3
+      DEBUG_LOGS: x
+      AWS_ACCESS_KEY_ID: root
+      AWS_SECRET_ACCESS_KEY: toor
+      AWS_DEFAULT_REGION: us-east-1
+      AWS_ENDPOINT_URL: http://localstack:4566
+      AWS_USE_SSL: false
+      AWS_URL_STYLE: path
     healthcheck:
-      test: [ "CMD", "redis-cli", "ping" ]
+      test: curl --silent --fail http://localhost:8080/ready > /dev/null || exit 1
+    depends_on:
+      postgresql:
+        condition: service_healthy
 
   postgresql:
     image: postgres:17.5-alpine
     environment:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=toor
-      - POSTGRES_DB=pbs_test
+      - POSTGRES_DB=rtdp_dev
     ports:
       - 5432:5432
+    volumes:
+      - ./docker-fixtures/postgresql:/docker-entrypoint-initdb.d
     healthcheck:
-      test: [ "CMD", "pg_isready", "-d", "pbs_test" ]
+      test: ["CMD-SHELL", "pg_isready -d rtdp_dev -U root"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
